@@ -14,7 +14,7 @@ import com.traveldreams.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	public void addCountry(Long userId, CountryEntity country) {
 		try {
