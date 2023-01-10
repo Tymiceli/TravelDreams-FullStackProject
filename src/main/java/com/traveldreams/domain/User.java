@@ -67,4 +67,5 @@ public class User {
 		int index = countries.indexOf(oldCountry);
 		countries.set(index, newCountry);
 	}
+
 }
