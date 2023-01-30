@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.traveldreams.entity.Authorities;
 import com.traveldreams.entity.CountryEntity;
 import com.traveldreams.entity.UserEntity;
 import com.traveldreams.exception.ResourceNotFoundException;
@@ -38,6 +39,16 @@ public class UserService {
 		} catch (NoSuchElementException e) {
 			throw new ResourceNotFoundException("User not found");
 		}
+	}
+
+	public void save(UserEntity user) {
+		userRepository.save(user);
+		
+		
+	}
+
+	public UserEntity findById(Long userId) {
+		return userRepository.findById(userId).get();
 	}
 
 }

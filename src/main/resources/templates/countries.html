@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<!-- <meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/> -->
+	<script type="text/javascript" src="/js/countries.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="countries.css"/> -->
+	<meta charset="UTF-8">
+	<title>All Countries</title>
+</head>
+<body>
+	<span>All countries will go here</span>
+	<div th:each="country:${countries}">
+		<span th:text="country.countryName"></span>
+	</div>
+	<div class="countries">
+		<div class="single-country-container" th:each="country : ${countries}">
+			<h4 class="country-name">[[${country.name}]]</h4>
+		</div>
+		
+	</div>
+</body>
+</html>

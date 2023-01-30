@@ -1,10 +1,13 @@
 package com.traveldreams.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class UserEntity {
+	
+	// Fields
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +39,22 @@ public class UserEntity {
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
 	private List<CountryEntity> countries;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+	private Set<Authorities> authorities = new HashSet<>();
 
+	
+	// Getters and Setters
+	
+	public Set<Authorities> getAuthorities() {
+		return authorities;
+	}
+	public void setAuthorities(Set<Authorities> authorities) {
+		this.authorities = authorities;
+	}
+	
 	public Long getId() {
 		return id;
 	}
