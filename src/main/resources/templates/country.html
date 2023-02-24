@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-    <head>
-        <script type="text/javascript" src="/js/countries.js"></script>
-        <link rel="stylesheet" type="text/css" href="countries.css"/>
-        <meta charset="UTF-8">
-        <title>Country</title>
-    </head>
-    <body>
-        <span>One Country name</span>
-    </body>
+<head>
+<script type="text/javascript" src="/js/countries.js"></script>
+<link rel="stylesheet" type="text/css" href="countries.css" />
+<meta charset="UTF-8">
+<title th:text="${country.name.common}"></title>
+</head>
+<body>
+
+<table>
+		<tr>
+			<th>Country ID</th>
+			<th>Common Name</th>
+			<th>Official Name</th>
+			<th>Region</th>
+			<th>Population</th>
+			<th>Landlocked</th>
+			<th>Flag</th>
+			<th>Add to your list</th>
+			
+		</tr>
+
+		<tr>
+
+			<td th:text="${country.id}"></td>
+			<td th:text="${country.name.common}"></td>
+			<td th:text="${country.name.official}"></td>
+			<td th:text="${country.region}"></td>
+			<td th:text="${country.population}"></td>
+			<!-- Ternary Operator for if landlocked
+			
+			If landlocked is true then display Yes, else display No -->
+			<td th:text="${country.landlocked} ? 'Yes' : 'No'"/>
+			<td th:text="${country.flag}"></td>
+			<td>
+				<form th:action="@{/country/{countryId} (countryId=${country.id})}" method="post">
+					<input type="submit" value="Add">
+				</form>
+			</td>
+
+		</tr>
+
+	</table>
+
+	<a href="/countries">Back to All Countries</a>
+</body>
 </html>
+<!-- 
+<form th:action="@{/users/{userId}/accounts (userId=${user.userId})}" method="post">
+				<input type="submit" value="Create New Bank Account"/></form><br/><br/> -->

@@ -10,7 +10,6 @@ import com.traveldreams.entity.CountryEntity;
 public interface CountryRepository extends JpaRepository <CountryEntity, Long> {
 
 	@Query (value = "select from Countries c where c.name = :name", nativeQuery = true)
-	public CountryEntity getCountryByName (String name);
-	
+	public CountryEntity getCountryByName (String name);	
 	
 }

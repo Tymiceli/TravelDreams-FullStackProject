@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeaf.org">
 <head>
-	<!-- <meta name="_csrf" th:content="${_csrf.token}"/>
+<!-- <meta name="_csrf" th:content="${_csrf.token}"/>
 	<meta name="_csrf_header" th:content="${_csrf.headerName}"/> -->
 <meta charset="UTF-8">
 <title>Home</title>
 </head>
 <body>
-<form method="post" action="/logout">
-	<!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
-	<button type="submit">Logout</button>
-</form>
+	<form method="post" action="/logout">
+		<!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+		<button type="submit">Logout</button>
+	</form>
 
-Home
+	Home
 
-<p th:text="|Hello there ${user.firstName}|"></p>
-<input type="hidden" th:value="user.id">
-<a href="/countries">See All Countries</a>
-
+	<p th:text="|Hello there ${user.firstName}|"></p>
+	<form action="/countries" method="get">
+		<input type="hidden" th:value="${user.id}"> <input
+			type="submit" value="See All Countries">
+	</form>
+	
+	<a th:href="@{/user/{userId} (userId=${user.id})}">Visit Profile Page</a>
 </body>
 </html>

@@ -53,10 +53,4 @@ public class RegisterController {
 		return "redirect:/login";
 	}
 	
-	@GetMapping("/home/{userId}")
-	public String getOneUser (ModelMap model, @PathVariable Long userId) {
-		UserEntity user = userService.findById(userId);
-		model.put("user", user);
-		return "home"+userId;
-	}
 }

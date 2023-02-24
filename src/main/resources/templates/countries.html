@@ -1,23 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
+
 <head>
 	<!-- <meta name="_csrf" th:content="${_csrf.token}"/>
 	<meta name="_csrf_header" th:content="${_csrf.headerName}"/> -->
-	<script type="text/javascript" src="/js/countries.js"></script>
-	<!-- <link rel="stylesheet" type="text/css" href="countries.css"/> -->
+	<!-- <script type="text/javascript" src="/js/countries.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="/css/countries.css" />
 	<meta charset="UTF-8">
 	<title>All Countries</title>
 </head>
+
 <body>
-	<span>All countries will go here</span>
-	<div th:each="country:${countries}">
-		<span th:text="country.countryName"></span>
-	</div>
-	<div class="countries">
-		<div class="single-country-container" th:each="country : ${countries}">
-			<h4 class="country-name">[[${country.name}]]</h4>
-		</div>
-		
+	<div class="page-wrap">
+
+		<section class="main-content">
+			<h1>All Countries</h1>
+			<div class="countries">
+				<div class="single-country" th:each="c: ${countries}">
+					<img class="country-flag" th:src="${c.flagImg.svg}">
+					<a th:href="@{/country/{countryId} (countryId = ${c.id})}">
+						<div th:text="${c.name.common}"></div>
+					</a>
+					<!-- <div th:text="${c.name.official}"></div> -->
+					<div th:text="|Region: ${c.region}|"></div>
+					<div th:text="|Population: ${c.population}|"></div>
+					<!-- Ternary Operator for if landlocked
+			
+				If landlocked is true then display Yes, else display No -->
+					<div>Landlocked: <div th:text="${c.landlocked} ? 'Yes' : 'No'"></div>
+					</div>
+					<!-- <div class="flag-emoji" th:text="${c.flag}"></div> -->
+					<div>
+						<form th:action="@{/country/{countryId} (countryId=${c.id})}" method="post">
+							<input type="submit" value="Dream">
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<nav class="main-nav">
+			<h2>Nav</h2>
+			<ul>
+				<li><a href="/home">Home</a></li>
+				<li><a th:href="@{/user/{userId} (userId=${user.id})}">Profile</a></li>
+				<li><a href="#">Clients</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</nav>
+
+		<aside class="main-sidebar">
+			<h2>Sidebar</h2>
+			<p>I am a rather effortless column of equal height.</p>
+		</aside>
+
 	</div>
 </body>
+
 </html>

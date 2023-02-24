@@ -1,5 +1,6 @@
 package com.traveldreams.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,144 +11,123 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.traveldreams.dto.Flag;
+import com.traveldreams.dto.Name;
 
 @Entity
 @Table(name = "countries")
 public class CountryEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name")
+//	@Column(name = "name")
 	@JsonProperty("name")
-	private String name;
+	@OneToOne (optional = false)
+	private Name name;
+	
+	@Column(name = "region")
+	@JsonProperty("region")
+	private String region;
+	
+	@Column(name = "population")
+	@JsonProperty("population")
+	private Integer population;
 
-	@Column(name = "capital")
-	@JsonProperty("capital")
-	private String capital;
-
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinTable(name = "country_currency",
-            joinColumns = @JoinColumn(name = "country_id"),
-            inverseJoinColumns = @JoinColumn(name = "currency_id"))
-    private List<CurrencyEntity> currencies;
-
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinTable(name = "country_language",
-            joinColumns = @JoinColumn(name = "country_id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id"))
-    private List<LanguageEntity> languages;
+	@Column(name = "landlocked")
+	@JsonProperty("landlocked")
+	private boolean landlocked;
 
 	@Column(name = "flag")
 	@JsonProperty("flag")
 	private String flag;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
-	private UserEntity user;
+	@ManyToMany(mappedBy = "countries", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	private List<UserEntity> user = new ArrayList<>();
+	
+//	@Column(name="flag_img")
+	@JsonProperty("flags")
+	@OneToOne(optional = true)
+	private Flag flagImg;
 
-	
-	
-	public CountryEntity(String name, String capital, List<CurrencyEntity> currencies,
-			List<LanguageEntity> languages, String flag) {
-		
-		this.name = name;
-		this.capital = capital;
-		this.currencies = currencies;
-		this.languages = languages;
-		this.flag = flag;
-//		this.user = user;
+	public CountryEntity() {
 	}
-
-
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
 
 
-
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
 
-
-
-	public void setName(String name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 
-
-
-	public String getCapital() {
-		return capital;
+	public Integer getPopulation() {
+		return population;
 	}
 
-
-
-	public void setCapital(String capital) {
-		this.capital = capital;
+	public void setPopulation(Integer population) {
+		this.population = population;
 	}
 
-
-
-	public List<CurrencyEntity> getCurrencies() {
-		return currencies;
+	public boolean isLandlocked() {
+		return landlocked;
 	}
 
-
-
-	public void setCurrencies(List<CurrencyEntity> currencies) {
-		this.currencies = currencies;
+	public void setLandlocked(boolean landlocked) {
+		this.landlocked = landlocked;
 	}
-
-
-
-	public List<LanguageEntity> getLanguages() {
-		return languages;
-	}
-
-
-
-	public void setLanguages(List<LanguageEntity> languages) {
-		this.languages = languages;
-	}
-
-
 
 	public String getFlag() {
 		return flag;
 	}
 
-
-
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
-
-
-	public UserEntity getUser() {
+	public List<UserEntity> getUser() {
 		return user;
 	}
-
-
-
-	public void setUser(UserEntity user) {
+	
+	public void setUser(List<UserEntity> user) {
 		this.user = user;
 	}
+
+	public Flag getFlagImg() {
+		return flagImg;
+	}
 	
+	public void setFlagImg(Flag flagImg) {
+		this.flagImg = flagImg;
+	}
+	
+	@Override
+	public String toString() {
+		return "CountryEntity [id=" + id + ", name=" + name + ", region=" + region + ", population=" + population
+				+ ", landlocked=" + landlocked + ", flag=" + flag + ", user=" + user + ", flagImg=" + flagImg + "]";
+	}
+
 }

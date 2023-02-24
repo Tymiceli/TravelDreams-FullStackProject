@@ -3,9 +3,9 @@ package com.traveldreams.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.traveldreams.entity.LanguageEntity;
+import com.traveldreams.dto.Name;
 
 @Repository
-public interface LanguageRepository extends JpaRepository<LanguageEntity, Long>{
+public interface NameRepository extends JpaRepository<Name, Long>{
 
 }

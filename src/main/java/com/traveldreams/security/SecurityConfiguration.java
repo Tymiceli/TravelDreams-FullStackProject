@@ -43,6 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		  .authorizeHttpRequests()
 		    .antMatchers("/admin/**").hasAnyRole("ADMIN")
 		    .antMatchers("/register").permitAll()
+		    .antMatchers("/css/**").permitAll()
+		    .antMatchers("/images/**").permitAll()
 		    .anyRequest()
 		    //hasAnyRole("USER") // subbing this out with code below to see if fixes registered user as not being set with USER role
 		    // it does fix it but I would still like the users to automatically be assigned USER role 

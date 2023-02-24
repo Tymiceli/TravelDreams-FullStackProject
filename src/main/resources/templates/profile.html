@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title th:text="|${user.firstName}'s Profile Page|"></title>
+</head>
+
+<body>
+    <a href="/home">Go Home</a> | <a href="/countries">See All Countries</a>
+    <div>
+        <form action="/update-user-account" method="post">
+            <input type="hidden" th:field="${user.id}" />
+            <input type="hidden" th:field="${user.countries}" />
+            <input type="hidden" th:field="${user.password}" />
+            Username: <input type="text" th:field="${user.username}" /><br>
+            First Name: <input type="text" th:field="${user.firstName}" /><br>
+            Last Name: <input type="text" th:field="${user.lastName}" /><br>
+            Email: <input type="text" th:field="${user.email}" /><br>
+
+            <input type="submit" value="Update User Account" />
+        </form>
+    </div>
+    <script type="text/javascript" src="/js/profile.js"></script>
+</body>
+
+</html>

@@ -3,9 +3,9 @@ package com.traveldreams.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.traveldreams.entity.CurrencyEntity;
+import com.traveldreams.dto.Flag;
 
 @Repository
-public interface CurrencyRepository extends JpaRepository<CurrencyEntity, Long>{
+public interface FlagRepository extends JpaRepository<Flag, Long>{
 
 }
