@@ -52,7 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		  .formLogin()
 		    .loginPage("/login")
 //		    .loginPage("/register")
-		    .defaultSuccessUrl("/home", true)
+//		    .defaultSuccessUrl("/home", true)
+		    .defaultSuccessUrl("/user", true)
 		  	.permitAll();
 		
 	}

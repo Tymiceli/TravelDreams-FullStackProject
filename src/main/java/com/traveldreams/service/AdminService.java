@@ -37,7 +37,7 @@ public class AdminService {
 //				.build()
 //				.toUri();
 		CountryEntity[] countries = restTemplate.getForObject(uri, CountryEntity[].class);
-		System.out.println(countries[0].getName());
+//		System.out.println(countries[0].getName());
 //		ResponseEntity<RestCountriesResponse[]> countries = restTemplate.getForEntity(uri, RestCountriesResponse[].class);
 //		System.out.println("Line 38 AdminService :" + countries.toString());
 		

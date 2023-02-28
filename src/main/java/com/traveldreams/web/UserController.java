@@ -37,12 +37,12 @@ public class UserController {
 		
 		return "profile";
 	}
-	@GetMapping("/user/{userId}")
-	public String getUserCountryList(ModelMap model, @PathVariable Long userId) {
+	@GetMapping("/user")
+	public String getUserCountryList(ModelMap model, @AuthenticationPrincipal UserEntity user) {
 		
 //		UserEntity userFoundByAuthPrincipal = userService.findById(user.getId());
 		
-		UserEntity userFoundByPathVariable = userService.findById(userId);
+		UserEntity userFoundByPathVariable = userService.findById(user.getId());
 		
 //		userFoundByPathVariable.getCountries().forEach(t -> System.out.println(t));
 				
@@ -63,7 +63,7 @@ public class UserController {
 		userService.save(user);
 		
 		
-		return "redirect:/user/"+userId;
+		return "redirect:/user";
 	}
 	
 	@PostMapping("/update-user-account")
@@ -79,7 +79,7 @@ public class UserController {
 		
 		
 		
-		return "redirect:/user/"+user.getId();
+		return "redirect:/user";
 	}
 	
 }

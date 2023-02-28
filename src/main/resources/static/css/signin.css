@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -23,6 +24,11 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  border-style: solid !important;
+  border-top-width: 2px !important;
+  border-radius: 20px;
+  background-color: #1DA1F2;
+
 }
 .form-signin .checkbox {
   font-weight: 400;
@@ -46,4 +52,8 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.container {
+    background-color: black;
 }

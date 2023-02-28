@@ -50,12 +50,4 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/index")
-	public String getIndex(@AuthenticationPrincipal UserEntity user) {
-
-
-		
-		return "index";
-	}
-		
 }

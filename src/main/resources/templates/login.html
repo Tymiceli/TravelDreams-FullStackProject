@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeaf.org">
-  <head>
+
+<head>
 	<title>Sign In</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Travel Dreams FullStack Application">
-    <meta name="author" content="Tyler Miceli">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Travel Dreams FullStack Application">
+	<meta name="author" content="Tyler Miceli">
 
 	<!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/css/signin.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="/css/signin.css" rel="stylesheet">
 
 	<!-- Icon -->
-    <link rel="icon" href="https://icons.iconarchive.com/icons/custo-man/christmas/256/Globe-Internet-icon.png">
-  </head>
+	<link rel="icon" href="https://icons.iconarchive.com/icons/custo-man/christmas/256/Globe-Internet-icon.png">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+
 <body class="text-center">
-			<form action="" method="post" class="form-signin">
-			  <img class="mt-5 mb-3" src="https://icons.iconarchive.com/icons/custo-man/christmas/256/Globe-Internet-icon.png" alt="" width="72" height="72">
-			  <h1 class="h3 mb-3 font-weight-normal">Travel Dreams</h1>
-			  <h1 class="h5 mb-3 font-weight-normal">Please sign in</h1>
-			  <label for="inputEmail" class="sr-only">Username</label>
-			  <input th:field="${user.username}" type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-			  <label for="inputPassword" class="sr-only">Password</label>
-			  <input th:field="${user.password}" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-			 
-			  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			  <div>
-				  <p>Don't have an account yet? <a href="/register">Register</a></p>
-			  </div>
-			</form>
-			  <!-- <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p> -->
-	</body>
+
+	</div>
+	<form action="" method="post" class="form-signin">
+		<h1 style="color:white">Travel Dreams</h1>
+		<img class="mt-2 mb-3" src="/images/earth.png" alt="" width="72" height="72">		
+		<h1 class="h5 mb-3 font-weight-normal" style="color: white">Sign In Below</h1>
+		<label for="inputEmail" class="sr-only">Username</label>
+		<input th:field="${user.username}" type="text" id="inputEmail" class="form-control" placeholder="Username"
+			required autofocus>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input th:field="${user.password}" type="password" id="inputPassword" class="form-control"
+			placeholder="Password" required>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		<div>
+			<p style="color: white; margin-top:5px">Don't have an account yet? <a href="/register" style="color: #0062cc">Register</a></p>
+		</div>
+	</form>
+	<!-- <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p> -->
+</body>
+
 </html>

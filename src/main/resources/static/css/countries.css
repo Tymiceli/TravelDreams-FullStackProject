@@ -23,10 +23,10 @@ body {
 
 .single-country {
     border-radius: 25px;
-    border: 2px solid #73AD21;
+    border: 2px solid #657786;
 
     display: grid;
-    background: rgb(96, 194, 135);
+    background: #E1E8ED;
     padding: 0px;
     width: 200px;
     min-width: 150px;
@@ -35,14 +35,20 @@ body {
     margin: 10px;
 
     line-height: normal;
-    color: white;
+    color: #353639;
     font-weight: bold;
     font-size: 1em;
     text-align: center;
-    /* align-content: center; */ 
     justify-content: center;
     flex-grow: 3;
+    transition: transform .2s; /* Animation */
+
 }
+
+.single-country:hover {
+  transform: scale(1.05);
+}
+
 .page-wrap {
     display: -webkit-box;           /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
@@ -79,7 +85,7 @@ body {
     -ms-flex: 1;                    /* IE 10 */
     flex: 1;                        /* NEW, Spec - Opera 12.1, Firefox 20+ */
     
-    background: #ccc;
+    background: #AAB8C2;
   }
   
   .main-sidebar {
@@ -107,7 +113,7 @@ body {
   
   body {
     padding: 2em;
-    background: #79a693;
+    background: #2da4ff;
   }
   * {
     -webkit-box-sizing: border-box;
@@ -126,14 +132,38 @@ body {
     margin: 0 0 1em 0;
   }
 
-  .flag-emoji {
-    font-size: 350%;
-  }
-
   .country-flag {
-    width: 196px;
+    width: 197px;
     height: 100px;
     border-radius: 25px 25px 0px 0px;
-    /* align-content: center;
-    align-items: center; */
+  }
+
+  ul {
+    padding-left:20px;
+  }
+
+  #dream-button {
+    transition: 3ms;
+    cursor: pointer;
+    border-radius: 5px;
+    /* width: 40px;
+    height: 20px; */
+  }
+
+  #dream-button:hover {
+    transform: scale(1.15);
+  }
+
+  #github-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .github-link {
+    display: flex;
+  }
+
+  .logout {
+    display: flex;
+    flex-grow: 2;
   }
