@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.traveldreams.domain.Country;
 import com.traveldreams.dto.Flag;
 import com.traveldreams.dto.Name;
 import com.traveldreams.entity.CountryEntity;
