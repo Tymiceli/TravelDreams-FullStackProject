@@ -31,6 +31,10 @@ public class CountryEntity {
 	@OneToOne (optional = false)
 	private Name name;
 	
+	@JsonProperty("flags")
+	@OneToOne(optional = true)
+	private Flag flagImg;
+	
 	@Column(name = "region")
 	@JsonProperty("region")
 	private String region;
