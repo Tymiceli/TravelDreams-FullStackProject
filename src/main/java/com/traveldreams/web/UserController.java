@@ -31,8 +31,6 @@ public class UserController {
 		
 		UserEntity userFound = userService.findById(user.getId());
 		
-//		System.out.println(passwordEncoder.encode(userFound.getPassword()));
-		
 		model.put("user", userFound);
 		
 		return "profile";
@@ -40,13 +38,9 @@ public class UserController {
 	@GetMapping("/user")
 	public String getUserCountryList(ModelMap model, @AuthenticationPrincipal UserEntity user) {
 		
-//		UserEntity userFoundByAuthPrincipal = userService.findById(user.getId());
+		UserEntity authUser = userService.findById(user.getId());
 		
-		UserEntity userFoundByPathVariable = userService.findById(user.getId());
-		
-//		userFoundByPathVariable.getCountries().forEach(t -> System.out.println(t));
-				
-		model.put("user", userFoundByPathVariable);
+		model.put("user", authUser);
 		
 		return "user";
 	}
@@ -54,26 +48,13 @@ public class UserController {
 	@PostMapping ("/user/{userId}/country/{countryId}/delete")
 	public String deleteCountryFromUserCountryList(@PathVariable Long userId, @PathVariable Long countryId) {
 		
-		UserEntity user = userService.findById(userId);
-		
-		CountryEntity countryToDelete = countryService.findById(countryId);
-		
-		user.getCountries().remove(countryToDelete);
-		
-		userService.save(user);
-		
+		userService.removeCountry(userId, countryId);
 		
 		return "redirect:/user";
 	}
 	
 	@PostMapping("/update-user-account")
 	public String updateUser (UserEntity user) {
-		
-//		List<CountryEntity> countries = user.getCountries();
-//		
-//		countries.forEach(c-> System.out.println("Saved User's Countries: " + c));
-		
-//		passwordEncoder.encode(user.getPassword());
 		
 		userService.save(user);
 		

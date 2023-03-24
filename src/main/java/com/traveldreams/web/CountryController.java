@@ -33,15 +33,8 @@ public class CountryController {
 	@GetMapping("/countries")
 	public String getAllCountries(ModelMap model,@AuthenticationPrincipal UserEntity user) throws IOException {
 		List<CountryEntity> allCountries = countryService.getAllCountries();
-//		Set<CountryEntity> allUniqueCountries = allCountries.stream().collect(Collectors.toSet());
-		
-//		for (CountryEntity c: allCountries) {
-//			System.out.println(c.getName());
-//		}
-		
+
 		System.out.println(user.getUsername());
-		
-//		UserEntity user = userService.findById(userId);
 		
 		model.put("countries", allCountries);
 		model.put("user", user);
@@ -54,33 +47,9 @@ public class CountryController {
 	@GetMapping("/get-all-countries")
 	public String allCountries(@AuthenticationPrincipal UserEntity user, ModelMap model) {
 		
-//		ResponseEntity<RestCountriesResponse[]> apiCall = adminService.callApi();
 		CountryEntity[] countries = adminService.callApi();
 		
-		List<CountryEntity> countriesList = new ArrayList<>();
-		List<Name> namesList = new ArrayList<>();
-		List<Flag> flagList = new ArrayList<>();
-		
-		for (CountryEntity c : countries) {
-			countriesList.add(c);
-			namesList.add(c.getName());
-			flagList.add(c.getFlagImg());
-		}
-		
-//		countryService.saveAll(countriesList);
-		for (CountryEntity c:countriesList) {
-		System.out.println(c.toString());
-		}
-		
-		countryService.saveFlag(flagList);
-		countryService.saveName(namesList);
-		countryService.saveAll(countriesList);
-		
-		System.out.println("All Countries Saved /n" + "Printing all saved Countries...");
-		
-		for (CountryEntity c : countriesList) {
-		System.out.println(c.toString());
-		}
+		countryService.storeCountries(countries);
 		
 		return "countries";
 	}

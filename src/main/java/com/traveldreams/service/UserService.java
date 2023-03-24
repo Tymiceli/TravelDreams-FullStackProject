@@ -17,9 +17,11 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private CountryRepository countryRepo;
 
+	@Autowired
+	private CountryRepository countryRepository;
+
+	
 	public void addCountry(Long userId, CountryEntity country) {
 		try {
 			UserEntity user = userRepository.findById(userId).get();
@@ -30,8 +32,10 @@ public class UserService {
 		}
 	}
 
-	public void removeCountry(Long userId, CountryEntity country) {
+	public void removeCountry(Long userId, Long countryId) {
 
+		CountryEntity country = countryRepository.findById(countryId).get();
+		
 		try {
 			UserEntity user = userRepository.findById(userId).get();
 			user.getCountries().remove(country);

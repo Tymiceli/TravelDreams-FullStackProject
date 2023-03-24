@@ -1,6 +1,7 @@
 package com.traveldreams.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,17 +47,6 @@ public class CountryService {
 	}
 
 	public List<CountryEntity> saveAll(List<CountryEntity> countriesList) {
-//		for (CountryEntity c : countriesList) {
-//			if (c.getCapital() == null) {
-//				System.out.println(c.getName() + "'s capital is null!");
-//			} else if (c.getCapital().length > 1) {
-//				String[] capital = c.getCapital();
-//				
-//				String.join(", ", capital);
-//				c.setCapital(capital);
-//			} 
-//		}
-//		this was an attempted fix on feb 7 trying to stop the exception "java.sql.SQLException: Incorrect string value: '\xAC\xED\x00\x05ur...' for column 'capital' at row 1"
 		return countryRepo.saveAll(countriesList);
 	}
 	
@@ -72,6 +62,35 @@ public class CountryService {
 	public void saveFlag(List<Flag> flagList) {
 		
 		flagRepo.saveAll(flagList);
+		
+	}
+
+	public void storeCountries(CountryEntity[] countries) {
+		// TODO Auto-generated method stub
+
+		List<CountryEntity> countriesList = new ArrayList<>();
+		List<Name> namesList = new ArrayList<>();
+		List<Flag> flagList = new ArrayList<>();
+		
+		for (CountryEntity c : countries) {
+			countriesList.add(c);
+			namesList.add(c.getName());
+			flagList.add(c.getFlagImg());
+		}
+		
+		for (CountryEntity c:countriesList) {
+		System.out.println(c.toString());
+		}
+		
+		saveFlag(flagList);
+		saveName(namesList);
+		saveAll(countriesList);
+		
+		System.out.println("All Countries Saved /n" + "Printing all saved Countries...");
+		
+		for (CountryEntity c : countriesList) {
+		System.out.println(c.toString());
+		}
 		
 	}
 
