@@ -27,10 +27,13 @@ public class CountryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@Column(name = "name")
 	@JsonProperty("name")
 	@OneToOne (optional = false)
 	private Name name;
+	
+	@JsonProperty("flags")
+	@OneToOne(optional = true)
+	private Flag flagImg;
 	
 	@Column(name = "region")
 	@JsonProperty("region")
@@ -51,11 +54,6 @@ public class CountryEntity {
 	@ManyToMany(mappedBy = "countries", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private List<UserEntity> user = new ArrayList<>();
 	
-//	@Column(name="flag_img")
-	@JsonProperty("flags")
-	@OneToOne(optional = true)
-	private Flag flagImg;
-
 	public CountryEntity() {
 	}
 

@@ -23,21 +23,10 @@ public class CountryService {
 	@Autowired
 	private FlagRepository flagRepo;
 	
-
 	// the following code is not to be used
 	public List<CountryEntity> getAllCountries() throws IOException {
-		
+		 
 		return countryRepo.findAll();
-
-//		Set<CountryEntity> allCountries = new LinkedHashSet<>();
-//		List<LanguageEntity> languages = new ArrayList<>();
-//		List<CurrencyEntity> currencies = new ArrayList<>();
-//		
-////		allCountries = countryRepo.findAll();
-//
-//		
-//		return allCountries;
-
 	}
 
 	public CountryEntity save(CountryEntity country) {
@@ -75,4 +64,7 @@ public class CountryService {
 		
 	}
 
+//	public void sortCountries () {
+//		
+//	}
 }

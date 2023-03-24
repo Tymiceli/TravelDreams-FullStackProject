@@ -4,13 +4,10 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.traveldreams.dto.RestCountriesResponse;
 import com.traveldreams.entity.CountryEntity;
 import com.traveldreams.entity.UserEntity;
 import com.traveldreams.repository.UserRepository;
