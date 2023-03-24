@@ -37,8 +37,11 @@ public class CountryController {
 	
 	@GetMapping("/countries")
 	public String getAllCountries(ModelMap model,@AuthenticationPrincipal UserEntity user) throws IOException {
+  List<CountryEntity> allCountries = countryService.getAllCountries();
+
+		System.out.println(user.getUsername());
 		
-		model.put("countries", countryService.getAllCountries());
+		model.put("countries", allCountries);
 		model.put("user", user);
 		
 		System.out.println("The controller for /countries GetMapping was hit");
@@ -51,26 +54,8 @@ public class CountryController {
 		
 		CountryEntity[] countries = adminService.callApi();
 		
-		List<CountryEntity> countriesList = new ArrayList<>();
-		List<Name> namesList = new ArrayList<>();
-		List<Flag> flagList = new ArrayList<>();
+		countryService.storeCountries(countries);
 		
-		for (CountryEntity c : countries) {
-			countriesList.add(c);
-			namesList.add(c.getName());
-			flagList.add(c.getFlagImg());
-		}
-		
-//		for (CountryEntity c:countriesList) {
-//		System.out.println(c.toString());
-//		}
-		
-		countryService.saveFlag(flagList);
-		countryService.saveName(namesList);
-		countryService.saveAll(countriesList);
-		
-		System.out.println("All Countries Saved /n" + "Printing all saved Countries...");
-
 		return "countries";
 	}
 	

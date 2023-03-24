@@ -54,6 +54,10 @@ public class CountryEntity {
 	@ManyToMany(mappedBy = "countries", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private List<UserEntity> user = new ArrayList<>();
 	
+	@JsonProperty("flags")
+	@OneToOne(optional = true)
+	private Flag flagImg;
+
 	public CountryEntity() {
 	}
 

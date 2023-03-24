@@ -28,6 +28,7 @@
 		<!-- <h1 style="color:white">Travel Dreams</h1> -->
 		<!-- <img class="mt-5 mb-3" src="/images/earth.png" alt="" width="72" height="72">		 -->
 		<h1 class="h3 mb-3 font-weight-normal" style="color:white">Update Your Details</h1>
+		<input type = "hidden" th:field="${user.id}">
 		<label for="inputEmail" class="sr-only">First Name</label>
 		<input th:field="${user.firstName}" type="text" id="inputEmail" class="form-control" placeholder="First Name"
 			required autofocus>
@@ -40,6 +41,7 @@
 		<label for="inputEmail" class="sr-only">Username</label>
 		<input th:field="${user.username}" type="text" id="inputEmail" class="form-control" placeholder="Username"
 			required autofocus>
+		<input type = "hidden" th:field="${user.password}">	
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		<div>
