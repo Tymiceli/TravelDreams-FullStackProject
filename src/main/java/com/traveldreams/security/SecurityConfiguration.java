@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/admin/**").hasAnyRole("ADMIN")
 		    .antMatchers("/register").permitAll()
 		    .antMatchers("/css/**").permitAll()
+		    .antMatchers("/js/**").permitAll()
 		    .antMatchers("/images/**").permitAll()
 		    .anyRequest()
 		    //hasAnyRole("USER") // subbing this out with code below to see if fixes registered user as not being set with USER role
