@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<script type="text/javascript" src="/js/countries.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/countries.css"/>
+	<meta charset="UTF-8">
+	<title th:text="|${country.flag} ${country.name.common}|"></title>
+</head>
+
+<body>
+	<img src="/images/earth.png" style="width:40px; margin-bottom:-20px; z-index: 1;">
+	<div class="logout">
+		<div style="flex-grow: 1;"></div>
+		<form method="post" action="/logout">
+			<button type="submit">Logout</button>
+		</form>
+	</div>
+
+	<div class="page-wrap">
+
+		<section class="main-content">
+			<h1 th:text="${country.name.common}"></h1>
+			<div class="countries">
+				<div class="single-country">
+					<img class="country-flag" th:src="${country.flagImg.svg}">
+					<!-- <a th:href="@{/country/{countryId} (countryId = ${c.id})}"> -->
+					<div th:text="${country.name.common}"></div>
+					<div th:text="${country.name.official}" style="color:rgb(34, 125, 68); font-weight: lighter;"></div>
+					<div th:text="|Region: ${country.region}|"></div>
+					<div th:text="|Population: ${country.population}|"></div>
+					<!-- Ternary Operator for if landlocked
+				
+						If landlocked is true then display Yes, else display No -->
+					<div>Landlocked: <div th:text="${country.landlocked} ? 'Yes' : 'No'"></div>
+					</div>
+					<!-- <div class="flag-emoji" th:text="${c.flag}"></div> -->
+					<div>
+						<form th:action="@{/country/{countryId} (countryId=${country.id})}" method="post">
+							<input type="submit" value="Dream">
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<nav class="main-nav">
+			<h2>Nav</h2>
+			<ul>
+				<li><a href="/user">Profile</a></li>
+				<li><a href="/countries">All Countries</a></li>
+			</ul>
+		</nav>
+
+		<aside class="main-sidebar">
+			<h2>Links</h2>
+			<div class="github-link">
+				<p style="margin-right: 5px;">Source Code:</p><a href="https://github.com/Tymiceli/TravelDreams-FullStackProject.git"><img id="github-icon" src="/images/github-icon.png"></a>
+				</div>
+		</aside>
+	</div>
+</body>
+
+</html>

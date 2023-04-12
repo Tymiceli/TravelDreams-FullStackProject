@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Update Account</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Travel Dreams FullStack Application">
+	<meta name="author" content="Tyler Miceli">
+
+	<!-- Bootstrap core CSS -->
+	<link href="/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="/css/signin.css" rel="stylesheet">
+
+	<!-- Icon -->
+	<link rel="icon" href="https://icons.iconarchive.com/icons/custo-man/christmas/256/Globe-Internet-icon.png">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+	</head>
+	<body class="text-center">
+
+	</div>
+	<form action="update-user-account" method="post" class="form-signin">
+		<!-- <h1 style="color:white">Travel Dreams</h1> -->
+		<!-- <img class="mt-5 mb-3" src="/images/earth.png" alt="" width="72" height="72">		 -->
+		<h1 class="h3 mb-3 font-weight-normal" style="color:white">Update Your Details</h1>
+		<input type = "hidden" th:field="${user.id}">
+		<label for="inputEmail" class="sr-only">First Name</label>
+		<input th:field="${user.firstName}" type="text" id="inputEmail" class="form-control" placeholder="First Name"
+			required autofocus>
+			<label for="inputEmail" class="sr-only">Last Name</label>
+		<input th:field="${user.lastName}" type="text" id="inputEmail" class="form-control" placeholder="Last Name"
+			required autofocus>
+			<label for="inputEmail" class="sr-only">Email</label>
+		<input th:field="${user.email}" type="text" id="inputEmail" class="form-control" placeholder="Email"
+			required autofocus>
+		<label for="inputEmail" class="sr-only">Username</label>
+		<input th:field="${user.username}" type="text" id="inputEmail" class="form-control" placeholder="Username"
+			required autofocus>
+		<input type = "hidden" th:field="${user.password}">	
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		<div>
+			<p style="color: white; margin-top:5px">Don't need to update? <a href="/user" style="color: #0062cc">Go Back</a></p>
+		</div>
+	</form>
+	<!-- <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p> -->
+</body>
+</html>
