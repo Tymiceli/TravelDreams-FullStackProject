@@ -20,11 +20,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CountryService countryService;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/profile")
 	public String getProfilePage (ModelMap model, @AuthenticationPrincipal UserEntity user) {
@@ -57,8 +54,6 @@ public class UserController {
 	public String updateUser (UserEntity user) {
 		
 		userService.save(user);
-		
-		
 		
 		return "redirect:/user";
 	}

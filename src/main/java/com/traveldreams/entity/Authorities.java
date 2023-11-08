@@ -52,6 +52,5 @@ public class Authorities implements GrantedAuthority{
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
-	
 
 }

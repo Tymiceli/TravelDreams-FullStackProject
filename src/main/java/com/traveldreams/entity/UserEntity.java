@@ -115,5 +115,14 @@ public class UserEntity {
 	public void setCountries(List<CountryEntity> countries) {
 		this.countries = countries;
 	}
+	
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", countries=" + countries + ", authorities="
+				+ authorities + "]";
+	}
+	
+	
 
 }

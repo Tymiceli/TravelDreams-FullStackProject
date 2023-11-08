@@ -19,9 +19,6 @@ import com.traveldreams.entity.UserEntity;
 @Controller
 public class LoginController {
 	
-//	@Autowired
-//	private UserService userService;
-	
 	@Autowired
 	AuthenticationManager authenticationManager;
 	
@@ -34,26 +31,4 @@ public class LoginController {
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<HttpStatus> login(@RequestBody UserEntity userModel) throws Exception {
-		System.out.println(userModel);
-		Authentication authentication;
-
-		try {
-			authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(userModel.getUsername(), userModel.getPassword()));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-		} catch (BadCredentialsException e) {
-			throw new Exception("Invalid credentials");
-		}
-
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-
-	}
-	
-	
-	
-	
-	
-
 }

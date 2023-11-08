@@ -15,23 +15,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder; 
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth
 			.userDetailsService(userDetailsService)
-			.passwordEncoder(passwordEncoder);
+			.passwordEncoder(passwordEncoder());
 
 	}
 
@@ -47,13 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/js/**").permitAll()
 		    .antMatchers("/images/**").permitAll()
 		    .anyRequest()
-		    //hasAnyRole("USER") // subbing this out with code below to see if fixes registered user as not being set with USER role
-		    // it does fix it but I would still like the users to automatically be assigned USER role 
 		    .authenticated().and()
 		  .formLogin()
 		    .loginPage("/login")
-//		    .loginPage("/register")
-//		    .defaultSuccessUrl("/home", true)
 		    .defaultSuccessUrl("/user", true)
 		  	.permitAll();
 		

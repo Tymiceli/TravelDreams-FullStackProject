@@ -3,6 +3,7 @@ package com.traveldreams.service;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.traveldreams.entity.Authorities;
@@ -16,11 +17,16 @@ import com.traveldreams.repository.UserRepository;
 public class UserService {
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AuthoritiesService authService;
+	
+	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
 	private CountryRepository countryRepository;
-
 	
 	public void addCountry(Long userId, CountryEntity country) {
 		try {
@@ -47,12 +53,22 @@ public class UserService {
 
 	public void save(UserEntity user) {
 		userRepository.save(user);
-		
-		
 	}
 
 	public UserEntity findById(Long userId) {
 		return userRepository.findById(userId).get();
+	}
+
+	public void register(UserEntity user) {
+		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		Authorities auth = new Authorities("ROLE_USER", user);
+		user.getAuthorities().add(auth);
+		
+		save(user);
+		System.out.println(user.toString());
+		authService.saveAuth(auth);
+		System.out.println(user.getAuthorities().toString());
 	}
 
 }
