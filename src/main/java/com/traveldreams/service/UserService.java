@@ -71,4 +71,9 @@ public class UserService {
 		System.out.println(user.getAuthorities().toString());
 	}
 
+	public UserEntity findByUsername(String username) {
+		
+		return userRepository.findByUsername(username);
+	}
+
 }

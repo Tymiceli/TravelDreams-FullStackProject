@@ -92,6 +92,8 @@ public class CountryController {
 	public ResponseEntity<List<CountryEntity>> sortCountries() throws IOException {
 		List<CountryEntity> countries = countryService.getAllCountries();
 		
+		
+		
 		return ResponseEntity.ok(countries);
 	}
 	
