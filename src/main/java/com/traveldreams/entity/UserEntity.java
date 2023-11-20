@@ -1,25 +1,15 @@
 package com.traveldreams.entity;
 
+import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 	
 	// Fields
 
@@ -47,7 +37,7 @@ public class UserEntity {
 	@JoinTable(name="user_country", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="country_id"))
 	private List<CountryEntity> countries;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "user")
 	private Set<Authorities> authorities = new HashSet<>();
 
 	
@@ -70,6 +60,26 @@ public class UserEntity {
 
 	public String getUsername() {
 		return username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	public void setUsername(String username) {
@@ -116,13 +126,10 @@ public class UserEntity {
 		this.countries = countries;
 	}
 	
-	@Override
-	public String toString() {
-		return "UserEntity [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", countries=" + countries + ", authorities="
-				+ authorities + "]";
-	}
-	
-	
-
+//	@Override
+//	public String toString() {
+//		return "UserEntity [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+//				+ ", lastName=" + lastName + ", email=" + email + ", countries=" + countries + ", authorities="
+//				+ authorities + "]";
+//	}
 }

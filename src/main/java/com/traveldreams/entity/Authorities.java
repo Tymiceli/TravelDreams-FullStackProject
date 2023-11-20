@@ -1,10 +1,6 @@
 package com.traveldreams.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,7 +13,7 @@ public class Authorities implements GrantedAuthority{
 	private Long id;
 	private String authority;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UserEntity user;
 	
 	public Authorities() {}

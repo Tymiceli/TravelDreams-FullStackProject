@@ -25,8 +25,8 @@
 
 <body class="text-center">
 
-	</div>
-	<form action="" method="post" class="form-signin">
+	<p th:if="${loginError}" class="error">Wrong username or password</p>
+	<form th:action="@{/login}" method="post" class="form-signin">
 		<h1 style="color:white">Travel Dreams</h1>
 		<img class="mt-2 mb-3" src="/images/earth.png" alt="" width="72" height="72">		
 		<h1 class="h5 mb-3 font-weight-normal" style="color: white">Sign In Below</h1>

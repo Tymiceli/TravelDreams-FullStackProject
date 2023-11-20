@@ -25,18 +25,11 @@ public class AdminService {
 	}
 	
 	@Secured("ROLE_ADMIN")
-//	public ResponseEntity<RestCountriesResponse[]> callApi() {
 	public CountryEntity[] callApi() {
 		RestTemplate restTemplate = new RestTemplate();
 		URI uri = URI.create("https://restcountries.com/v3.1/all");
 				
-//				UriComponentsBuilder.fromHttpUrl("https://restcountries.com/v3.1/all")
-//				.build()
-//				.toUri();
 		CountryEntity[] countries = restTemplate.getForObject(uri, CountryEntity[].class);
-//		System.out.println(countries[0].getName());
-//		ResponseEntity<RestCountriesResponse[]> countries = restTemplate.getForEntity(uri, RestCountriesResponse[].class);
-//		System.out.println("Line 38 AdminService :" + countries.toString());
 		
 		return countries;
 		

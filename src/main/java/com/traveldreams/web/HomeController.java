@@ -13,6 +13,8 @@ import com.traveldreams.service.AdminService;
 import com.traveldreams.service.CountryService;
 import com.traveldreams.service.UserService;
 
+import java.util.Optional;
+
 @Controller
 public class HomeController {
 	
@@ -29,24 +31,9 @@ public class HomeController {
 	public String getHomePage(@AuthenticationPrincipal UserEntity user, ModelMap model) {
 		Long userId = user.getId();
 		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		UserEntity authenticatedUser = (UserEntity)authentication.getPrincipal();
-//		
-//		System.out.println(authenticatedUser.getFirstName());
-//		
-//		if (authenticatedUser.getId() == null) {
-////			model.put("user", authenticatedUser);
-//			return "home";
-//		}
-		
-		UserEntity userFound = userService.findById(userId);
-		
-		model.put("user", userFound);
-		
-		
-//		List<UserEntity> allUserAccounts = adminService.getAllUserAccounts();
-//		System.out.println(allUserAccounts);
-		
+		Optional<UserEntity> userFound = userService.findById(userId);
+		userFound.ifPresent(userEntity -> model.put("user", userEntity));
+
 		return "home";
 	}
 	

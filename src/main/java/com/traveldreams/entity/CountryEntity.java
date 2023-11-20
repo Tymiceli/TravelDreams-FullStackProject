@@ -3,21 +3,10 @@ package com.traveldreams.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.traveldreams.dto.Flag;
 import com.traveldreams.dto.Name;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "countries")
@@ -51,7 +40,7 @@ public class CountryEntity {
 	@JsonProperty("flag")
 	private String flag;
 	
-	@ManyToMany(mappedBy = "countries", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@ManyToMany(mappedBy = "countries", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	private List<UserEntity> user = new ArrayList<>();
 	
 	public CountryEntity() {

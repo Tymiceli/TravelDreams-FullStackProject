@@ -1,8 +1,13 @@
 package com.traveldreams.service;
 
+import java.util.HashMap;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,61 +19,21 @@ import com.traveldreams.repository.CountryRepository;
 import com.traveldreams.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService extends UserDetailsServiceImpl {
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private AuthoritiesService authService;
-	
-	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private CountryRepository countryRepository;
-	
-	public void addCountry(Long userId, CountryEntity country) {
-		try {
-			UserEntity user = userRepository.findById(userId).get();
-			user.getCountries().add(country);
-			userRepository.save(user);
-		} catch (NoSuchElementException e) {
-			throw new ResourceNotFoundException("User not found");
-		}
+	public UserService(UserRepository userRepository) {
+		super();
+		this.userRepository = userRepository;
 	}
 
-	public void removeCountry(Long userId, Long countryId) {
-
-		CountryEntity country = countryRepository.findById(countryId).get();
-		
-		try {
-			UserEntity user = userRepository.findById(userId).get();
-			user.getCountries().remove(country);
-			userRepository.save(user);
-		} catch (NoSuchElementException e) {
-			throw new ResourceNotFoundException("User not found");
-		}
+	public UserEntity save(UserEntity user) {
+		return userRepository.save(user);
 	}
 
-	public void save(UserEntity user) {
-		userRepository.save(user);
-	}
-
-	public UserEntity findById(Long userId) {
-		return userRepository.findById(userId).get();
-	}
-
-	public void register(UserEntity user) {
-		
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		Authorities auth = new Authorities("ROLE_USER", user);
-		user.getAuthorities().add(auth);
-		
-		save(user);
-		System.out.println(user.toString());
-		authService.saveAuth(auth);
-		System.out.println(user.getAuthorities().toString());
+	public Optional<UserEntity> findById(Long userId) {
+		return userRepository.findById(userId);
 	}
 
 	public UserEntity findByUsername(String username) {
@@ -76,4 +41,8 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userRepository.findByUsername(username);
+	}
 }
