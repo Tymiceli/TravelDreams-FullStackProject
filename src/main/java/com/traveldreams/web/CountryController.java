@@ -3,6 +3,7 @@ package com.traveldreams.web;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,14 +27,17 @@ import com.traveldreams.service.UserService;
 
 @Controller
 public class CountryController {
-	
-	@Autowired
+
 	private CountryService countryService;
-	@Autowired
-	private AdminService adminService;
-	@Autowired
 	private UserService userService;
-	
+	private AdminService adminService;
+
+	public CountryController(CountryService countryService, UserService userService, AdminService adminService) {
+		this.countryService = countryService;
+		this.userService = userService;
+		this.adminService = adminService;
+	}
+
 	@GetMapping("/countries")
 	public String getAllCountries(ModelMap model,@AuthenticationPrincipal UserEntity user) throws IOException {
   List<CountryEntity> allCountries = countryService.getAllCountries();
@@ -62,8 +66,8 @@ public class CountryController {
 	public String getCountryPage (@PathVariable Long countryId, ModelMap model, @AuthenticationPrincipal UserEntity user) {
 		
 		CountryEntity countryFoundById = countryService.findById(countryId);
-		UserEntity userFound = userService.findById(user.getId());
-		
+		Optional<UserEntity> userFound = userService.findById(user.getId());
+
 		model.put("country", countryFoundById);
 		model.put("user", userFound);
 		
@@ -73,49 +77,20 @@ public class CountryController {
 	@PostMapping("/country/{countryId}")
 	public String saveCountryToUser(@PathVariable Long countryId, @AuthenticationPrincipal UserEntity user) {
 		
-		UserEntity userFound = userService.findById(user.getId());
-		
+		Optional<UserEntity> userFound = userService.findById(user.getId());
+
 		CountryEntity country = countryService.findById(countryId);
-		
-		if (!userFound.getCountries().contains(country)) {			
-			userFound.getCountries().add(country);
+
+		if (userFound.isPresent()) {
+			if (!userFound.get().getCountries().contains(country)) {
+				userFound.get().getCountries().add(country);
+			}
+
+			userService.save(userFound.get());
 		}
-		
-		userService.save(userFound);
-		
+
 		return "redirect:/countries";
 		
 	}
-	
-	@GetMapping("/sort-countries-by-name")
-	@ResponseBody
-	public ResponseEntity<List<CountryEntity>> sortCountries() throws IOException {
-		List<CountryEntity> countries = countryService.getAllCountries();
-		
-		
-		
-		return ResponseEntity.ok(countries);
-	}
-	
-	@PostMapping("/display-sorted-countries")
-	@ResponseBody
-	public ResponseEntity<String> receiveSortedCountries(@RequestBody List<CountryEntity> sortedCountries) {
-		
-		List<Name> namesList = new ArrayList<>();
-		List<Flag> flagList = new ArrayList<>();
-		
-		for (CountryEntity c: sortedCountries) {
-			namesList.add(c.getName());
-			flagList.add(c.getFlagImg());
-		}
-		countryService.saveName(namesList);
-		countryService.saveFlag(flagList);
-		countryService.saveAll(sortedCountries);
-		
-		System.out.println(sortedCountries);
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Successful sorting");
-	}
-
 }
 

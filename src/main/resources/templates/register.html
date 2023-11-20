@@ -26,7 +26,7 @@
 	</head>
 	<body class="text-center">
 
-	<form action="" method="post" class="form-signin">
+	<form th:action="@{/register}" method="POST" class="form-signin">
 		<!-- <h1 style="color:white">Travel Dreams</h1> -->
 		<!-- <img class="mt-5 mb-3" src="/images/earth.png" alt="" width="72" height="72">		 -->
 		<h1 class="h3 mb-3 font-weight-normal" style="color:white">Register Below</h1>
@@ -34,10 +34,10 @@
 
 		<span id="error1"></span><br/>
 		<label for="inputEmail" class="sr-only">First Name</label>
-		<input th:field="${user.firstName}" type="text" id="" class="form-control" placeholder="First Name"
+		<input th:field="${user.firstName}" type="text" id="firstName" class="form-control" placeholder="First Name"
 			required autofocus>
 			<label for="inputEmail" class="sr-only">Last Name</label>
-		<input th:field="${user.lastName}" type="text" id="" class="form-control" placeholder="Last Name"
+		<input th:field="${user.lastName}" type="text" id="lastName" class="form-control" placeholder="Last Name"
 			required autofocus>
 			<label for="inputEmail" class="sr-only">Email</label>
 		<input th:field="${user.email}" type="email" id="inputEmail" class="form-control" placeholder="Email"

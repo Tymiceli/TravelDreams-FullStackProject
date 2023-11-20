@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,6 @@ import com.traveldreams.entity.UserEntity;
 @Controller
 public class LoginController {
 	
-	@Autowired
-	AuthenticationManager authenticationManager;
-	
 	@GetMapping("/login")
 	public String login(ModelMap model) {
 		UserEntity user = new UserEntity();
@@ -30,5 +28,9 @@ public class LoginController {
 		
 		return "login";
 	}
-	
+	@GetMapping("/login-error")
+	public String getLoginError (Model model) {
+		model.addAttribute("loginError", true);
+		return "login";
+	}
 }

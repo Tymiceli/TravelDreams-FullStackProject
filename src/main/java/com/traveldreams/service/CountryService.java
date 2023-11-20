@@ -3,7 +3,10 @@ package com.traveldreams.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.traveldreams.entity.UserEntity;
+import com.traveldreams.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,40 +20,44 @@ import com.traveldreams.repository.NameRepository;
 @Service
 public class CountryService {
 
-	@Autowired
-	private CountryRepository countryRepo;
-	@Autowired
-	private NameRepository nameRepo;
-	@Autowired
-	private FlagRepository flagRepo;
-	
+	private CountryRepository countryRepository;
+	private NameRepository nameRepository;
+	private FlagRepository flagRepository;
+	private UserRepository userRepository;
+
+	public CountryService(CountryRepository countryRepository, NameRepository nameRepository, FlagRepository flagRepository, UserRepository userRepository) {
+		this.countryRepository = countryRepository;
+		this.nameRepository = nameRepository;
+		this.flagRepository = flagRepository;
+		this.userRepository = userRepository;
+	}
+
 	// the following code is not to be used
 	public List<CountryEntity> getAllCountries() throws IOException {
 		 
-		return countryRepo.findAll();
+		return countryRepository.findAll();
 	}
 
 	public CountryEntity save(CountryEntity country) {
 
-		return countryRepo.save(country);
+		return countryRepository.save(country);
 	}
 
 	public List<CountryEntity> saveAll(List<CountryEntity> countriesList) {
-		return countryRepo.saveAll(countriesList);
+		return countryRepository.saveAll(countriesList);
 	}
 	
 	public void saveName(List<Name> namesList) {
-		
-		nameRepo.saveAll(namesList);
+		nameRepository.saveAll(namesList);
 	}
 
 	public CountryEntity findById(Long countryId) {
-		return countryRepo.findById(countryId).get();
+		return countryRepository.findById(countryId).get();
 	}
 
 	public void saveFlag(List<Flag> flagList) {
 		
-		flagRepo.saveAll(flagList);
+		flagRepository.saveAll(flagList);
 		
 	}
   
@@ -80,6 +87,17 @@ public class CountryService {
 		System.out.println(c.toString());
 		}
 		
+	}
+
+	public void removeCountry(Long userId, Long countryId) {
+		Optional<UserEntity> userFound = userRepository.findById(userId);
+
+		Optional<CountryEntity> countryFound = countryRepository.findById(countryId);
+
+		userFound.get().getCountries().remove(countryFound.get());
+
+		userRepository.save(userFound.get());
+
 	}
 
 //	public void sortCountries () {
