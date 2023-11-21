@@ -83,7 +83,7 @@ public class UserController {
 		return ResponseEntity.ok(new RefreshTokenResponse(accessToken, refreshTokenRequest.refreshToken()));
 	}
 	@PostMapping("/register")
-	public ResponseEntity<AuthenticationResponse> signUpUser (UserEntity user) {
+	public String signUpUser (UserEntity user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Authorities authorities = new Authorities("ROLE_USER", user);
 		user.getAuthorities().add(authorities);
@@ -92,8 +92,10 @@ public class UserController {
 
 		String accessToken = jwtService.generateToken(new HashMap<>(), savedUser);
 		RefreshToken refreshToken = refreshTokenService.generateRefreshToken(savedUser.getId());
-
-		return ResponseEntity.ok(new AuthenticationResponse(savedUser.getUsername(), accessToken, refreshToken.getRefreshToken()));
+		
+		ResponseEntity<AuthenticationResponse> ok = ResponseEntity.ok(new AuthenticationResponse(savedUser.getUsername(), accessToken, refreshToken.getRefreshToken()));
+		
+		return "redirect:/login";
 	}
 	@GetMapping("/register")
 	public String getRegisterPage(ModelMap model) {
