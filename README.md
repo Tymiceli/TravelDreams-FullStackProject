@@ -21,3 +21,4 @@ Technologies Used:
     - MySQL
     - Hibernate ORM
 
+Getting Started:
