@@ -31,7 +31,7 @@ public class JwtService {
 	 */
 
 	
-	@Value("${jwt.signingKey}")
+	@Value("${JWT_SIGNING_KEY}")
 	private String jwtSigningKey;
 	
 	@Value("${jwt.expirationTimeInMillis}")
