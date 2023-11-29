@@ -27,14 +27,9 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/home")
-	public String getHomePage(@AuthenticationPrincipal UserEntity user, ModelMap model) {
-		Long userId = user.getId();
-		
-		Optional<UserEntity> userFound = userService.findById(userId);
-		userFound.ifPresent(userEntity -> model.put("user", userEntity));
+	@GetMapping({"/home", "/"})
+    public String getHomePage() {
 
 		return "home";
 	}
-	
 }

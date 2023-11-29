@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Dreams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Additional styles if needed */
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+<header class="bg-white shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <img src="/images/earth.png" alt="Earth logo" class="mr-3" style="max-width: 50px">
+            <span class="font-bold text-xl">Travel Dreams</span>
+        </div>
+        <div>
+            <!--suppress HtmlUnknownTarget -->
+            <a href="/login" class="text-gray-800 hover:text-gray-600">Login</a>
+            |
+            <!--suppress HtmlUnknownTarget -->
+            <a href="/register" class="text-gray-800 hover:text-gray-600">Sign Up</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-6 py-8">
+    <section class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-2">Welcome to Travel Dreams.</h1>
+        <p class="text-xl">Share yours today!</p>
+    </section>
+
+    <section class="mb-8">
+        <div class="flex items-center border rounded overflow-hidden">
+            <input type="search" placeholder="Search Travel Dreams..." class="px-4 py-2 w-full">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2" id="search-btn">Search</button>
+        </div>
+    </section>
+<!-- This section will be populated using thymeleaf later on, for now, we are using fake data-->
+    <section class="grid grid-cols-2 gap-4">
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Latest Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                <div class="border rounded p-4">
+                    <img src="/images/iceland.jpeg" alt="Latest Post" class="mb-3">
+                    <h3 class="font-bold">Living my dream of travelling to Iceland</h3>
+                    <p class="text-sm">TheDanMan, November 23, 2023</p>
+                </div>
+                <div class="border rounded p-4">
+                    <img src="/images/drakeInToronto.jpeg" alt="Latest Post" class="mb-3">
+                    <h3 class="font-bold">Living it up in the 6ix</h3>
+                    <p class="text-sm">Drake, November 27, 2023</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Featured Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                <div class="border rounded p-4">
+                    <img src="/images/JapanCrossing.jpeg" alt="Featured Post" class="mb-3">
+                    <h3 class="font-bold">The Neon Metropolis</h3>
+                    <p class="text-sm">ChatGPT, September 13, 2023</p>
+                </div>
+                <div class="border rounded p-4">
+                    <img src="/images/MountFuji.jpeg" alt="Featured Post" class="mb-3">
+                    <h3 class="font-bold">Nature's Palette</h3>
+                    <p class="text-sm">ChadGPT, February 2, 2023</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+</main>
+
+<footer class="bg-white border-t mt-12">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <p class="text-sm">&copy;Tyler Miceli 2023</p>
+        <div>
+            <!--suppress HtmlUnknownTarget -->
+            <a href="/privacy-policy" class="text-sm text-gray-800 hover:text-gray-600 mr-4">Privacy Policy</a>
+            <!--suppress HtmlUnknownTarget -->
+            <a href="/terms-of-use" class="text-sm text-gray-800 hover:text-gray-600">Terms of Use</a>
+        </div>
+        <button class="text-sm text-gray-800 hover:text-gray-600">Accessibility Menu</button>
+    </div>
+</footer>
+</body>
+</html>

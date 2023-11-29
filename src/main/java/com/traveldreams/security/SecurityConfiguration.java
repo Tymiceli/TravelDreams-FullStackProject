@@ -50,6 +50,7 @@ public class SecurityConfiguration {
 					request
 							.requestMatchers("/admin/**").hasAnyRole("ADMIN")
 							.requestMatchers("/register").permitAll()
+							.requestMatchers("/home", "/").permitAll()
 							.requestMatchers("/css/**").permitAll()
 							.requestMatchers("/js/**").permitAll()
 							.requestMatchers("/images/**").permitAll()
