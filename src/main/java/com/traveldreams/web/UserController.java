@@ -7,7 +7,6 @@ import com.traveldreams.request.RefreshTokenRequest;
 import com.traveldreams.response.AuthenticationResponse;
 import com.traveldreams.response.RefreshTokenResponse;
 import com.traveldreams.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.traveldreams.entity.CountryEntity;
 import com.traveldreams.entity.UserEntity;
 
 import java.util.HashMap;
@@ -94,7 +92,7 @@ public class UserController {
 		RefreshToken refreshToken = refreshTokenService.generateRefreshToken(savedUser.getId());
 		
 		ResponseEntity<AuthenticationResponse> ok = ResponseEntity.ok(new AuthenticationResponse(savedUser.getUsername(), accessToken, refreshToken.getRefreshToken()));
-		
+		System.out.println(ok.toString());
 		return "redirect:/login";
 	}
 	@GetMapping("/register")
@@ -108,7 +106,7 @@ public class UserController {
 	@ResponseBody
 	public Boolean postExists (@RequestBody UserEntity user) {
 
-		System.out.println("Endpoint hit");
+		// System.out.println("Endpoint hit");
 		user = userService.findByUsername(user.getUsername());
 
 		Boolean userFoundCheck = user !=null;

@@ -1,10 +1,10 @@
 package com.traveldreams.security;
 
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import com.traveldreams.entity.UserEntity;
 
-public class CustomSecurityUser extends UserEntity implements UserDetails{
+public class CustomSecurityUser extends UserEntity {
 
 	private static final long serialVersionUID = -1879148325125317719L;
 
